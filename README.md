@@ -150,7 +150,11 @@ of duplicating theme code:
   persists the choice to `localStorage`, and exposes it to other scripts as
   `window.siteTheme` (`.get()`, `.set("dark"|"light")`, `.toggle()`) — it
   also fires a `themechange` event on `document` whenever the theme
-  changes, from any source, so other UI can stay in sync.
+  changes, from any source, so other UI can stay in sync. Every switch
+  (nav button or the hero lamp) also plays a little click — `assets/
+  sounds/light-on.mp3` going to light, `assets/sounds/light-off.mp3`
+  going to dark. Swap either file to change the sound; nothing else
+  needs to change.
 
 If you add more pages later, include both scripts the same way (init in
 `<head>`, toggle at the end of `<body>`) and the dark-mode toggle will work

@@ -3,11 +3,30 @@
    changes, from ANY source — so other scripts (like the hero lamp) can
    both trigger a change and stay in sync with changes made elsewhere.
    Also wires up the #themeToggle button itself when one is present on the
-   page. Shared by index.html and resume.html — include this at the end of
-   <body>, after the button markup (if any) exists. */
+   page, and plays a little on/off click sound on every switch. Shared by
+   index.html and resume.html — include this at the end of <body>, after
+   the button markup (if any) exists. */
 (function () {
   var root = document.documentElement;
   var toggle = document.getElementById("themeToggle");
+
+  // Preloaded once and replayed from the start each time (rather than
+  // `new Audio()` per click) so rapid toggling never overlaps itself.
+  // Only ever triggered from a real click/keypress handler below, so
+  // browser autoplay restrictions don't come into play — but .play()'s
+  // promise is still swallowed defensively in case a browser blocks it
+  // or the file fails to load.
+  var sounds = { light: new Audio("assets/sounds/light-on.mp3"), dark: new Audio("assets/sounds/light-off.mp3") };
+
+  function playSwitchSound(mode) {
+    var audio = sounds[mode];
+    if (!audio) return;
+    try {
+      audio.currentTime = 0;
+      var p = audio.play();
+      if (p && p.catch) p.catch(function () {});
+    } catch (e) {}
+  }
 
   function getTheme() {
     return root.getAttribute("data-theme") === "dark" ? "dark" : "light";
@@ -27,6 +46,7 @@
     }
     localStorage.setItem("theme", mode);
     if (toggle) toggle.setAttribute("aria-pressed", String(mode === "dark"));
+    playSwitchSound(mode);
     document.dispatchEvent(new CustomEvent("themechange", { detail: { theme: mode } }));
 
     // Wait a frame for the instant swap to actually paint, then remove the
