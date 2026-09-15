@@ -11,6 +11,7 @@ const PROJECTS = [
   {
     id: "vero-enclosure",
     org: "Vero Electric",
+    category: "Vero Electric",
     title: "Industrial Battery Enclosure",
     tagline: "240 kWh / 120 kW BESS enclosure, thermally validated with FEA",
     tags: ["Mechanical Design", "Thermal FEA", "DFM", "SolidWorks"],
@@ -33,6 +34,7 @@ const PROJECTS = [
   {
     id: "vero-board",
     org: "Vero Electric",
+    category: "Vero Electric",
     title: "BMS & CAN Bus Board Design",
     tagline: "4-layer, 64-series-cell BMS node PCB designed in KiCad",
     tags: ["PCB Design", "KiCad", "High-Voltage", "4-Layer"],
@@ -53,6 +55,7 @@ const PROJECTS = [
   {
     id: "dynamometer",
     org: "Penn Electric Racing",
+    category: "Penn Electric Racing",
     title: "Regen-Capable Dynamometer",
     tagline: "Custom brake-absorption dyno for gearbox validation",
     tags: ["Mechanical Design", "Powertrain", "Ongoing"],
@@ -70,6 +73,7 @@ const PROJECTS = [
   {
     id: "drs",
     org: "Penn Electric Racing",
+    category: "Penn Electric Racing",
     title: "Drag Reduction System (DRS)",
     tagline: "Servo-actuated rear wing flaps, validated with CFD",
     tags: ["CFD", "Mechanism Design", "Rookie Project", "Paused"],
@@ -89,6 +93,7 @@ const PROJECTS = [
   {
     id: "arc",
     org: "American Rocketry Challenge",
+    category: "Other",
     title: "Flight Computer & Apogee Control",
     tagline: "Custom 4-layer flight computer + CFD-driven apogee control",
     tags: ["PCB Design", "CFD", "ESP32-S3", "Embedded"],
@@ -114,6 +119,7 @@ const PROJECTS = [
   {
     id: "cam-assay",
     org: "cc-TDI Internship",
+    category: "Other",
     title: "CAM Assay Rapid Prototyping",
     tagline: "Low-cost camera monitoring for quail embryo drug trials",
     tags: ["Rapid Prototyping", "OpenCV", "Python", "3D Printing"],
@@ -135,6 +141,7 @@ const PROJECTS = [
   {
     id: "per-rookie",
     org: "Penn Electric Racing",
+    category: "Penn Electric Racing",
     title: "Rookie Year: Fab, Composites & Renders",
     tagline: "Welding jigs, carbon-fiber layups, and Aero package renders",
     tags: ["SolidWorks", "Composites", "Keyshot", "Rookie Year"],
@@ -166,6 +173,7 @@ PROJECTS.forEach((p, index) => {
   const tile = document.createElement("button");
   tile.className = "tile";
   tile.setAttribute("data-index", index);
+  tile.setAttribute("data-category", p.category);
   tile.innerHTML = `
     <img class="tile__img" src="${p.hero}" alt="${p.title}" loading="lazy">
     <div class="tile__scrim"></div>
@@ -179,6 +187,42 @@ PROJECTS.forEach((p, index) => {
   tile.addEventListener("click", () => openModal(index));
   grid.appendChild(tile);
 });
+
+/* ==========================================================================
+   Project filter chips
+   Click a chip to toggle it on/off. With one or more chips active, only
+   tiles whose category matches ANY active chip stay visible (an "or"
+   across chips, since they're all the same facet — which team/category a
+   project belongs to). With none active, every tile shows. To add a new
+   keyword later: add a matching <button class="filter-chip" data-filter="...">
+   in index.html's #filterBar, and give the relevant PROJECTS entries that
+   same string as their `category` — nothing else here needs to change.
+   ========================================================================== */
+
+const filterBar = document.getElementById("filterBar");
+const activeFilters = new Set();
+
+function applyFilters() {
+  const tiles = grid.querySelectorAll(".tile");
+  tiles.forEach((tile) => {
+    const show = activeFilters.size === 0 || activeFilters.has(tile.getAttribute("data-category"));
+    tile.hidden = !show;
+  });
+}
+
+if (filterBar) {
+  filterBar.querySelectorAll(".filter-chip").forEach((chip) => {
+    chip.addEventListener("click", () => {
+      const key = chip.getAttribute("data-filter");
+      const nowActive = !chip.classList.contains("is-active");
+      chip.classList.toggle("is-active", nowActive);
+      chip.setAttribute("aria-pressed", String(nowActive));
+      if (nowActive) activeFilters.add(key);
+      else activeFilters.delete(key);
+      applyFilters();
+    });
+  });
+}
 
 /* ==========================================================================
    Modal

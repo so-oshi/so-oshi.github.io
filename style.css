@@ -363,6 +363,35 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
 .section-head h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 8px; }
 .section-head p { color: var(--text-muted); margin: 0; }
 
+/* ---- Filter chips — small toggle buttons, well under .btn's footprint ---- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+.filter-chip {
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+  font-weight: 500;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease, transform .15s ease;
+}
+.filter-chip:hover { border-color: var(--accent); color: var(--accent); }
+.filter-chip:active { transform: scale(0.96); }
+.filter-chip.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-contrast);
+  font-weight: 600;
+}
+.filter-chip.is-active:hover { color: var(--accent-contrast); }
+
 /* ==========================================================================
    Projects grid — packed, not full-width
    ========================================================================== */
