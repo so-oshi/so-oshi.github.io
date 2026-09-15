@@ -277,12 +277,23 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
    Pinned with position:absolute, same trick as .hero__lamp above, so it
    sits reliably in the gap between the title text and the lamp — never
    wrapping onto its own line the way a flex layout would if the title
-   text happened to run long at a given width. Nudge `top`/`right` here to
-   reposition it; they're independent of the lamp's own offsets. */
+   text happened to run long at a given width. Nudge `right` to move it
+   left/right; it's independent of the lamp's own offsets.
+
+   `top` is a formula, not a fixed number: it works out where the
+   vertical midpoint between the "Benjamin Wrinn" title and the
+   Resume/About Me/View Projects button row falls (given .hero's
+   padding-top, the eyebrow's height+margin, the title's own height, and
+   the buttons' height — all known from the rules around them), then
+   backs out the top offset that puts the PHOTO's own vertical center at
+   that same midpoint. Since the title's font-size and the photo's own
+   size both scale with viewport width (via clamp()), this keeps the
+   photo centered on that midpoint at any width rather than only at one
+   specific screen size. */
 
 .hero__photo {
   position: absolute;
-  top: 90px;
+  top: calc(135px + 0.75 * clamp(2.6rem, 7vw, 4.4rem) - 0.625 * clamp(140px, 17vw, 240px));
   right: clamp(140px, 18vw, 220px);
   width: clamp(140px, 17vw, 240px);
   aspect-ratio: 4 / 5;
