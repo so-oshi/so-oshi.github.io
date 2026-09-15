@@ -258,6 +258,51 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
   .hero__lamp { display: none; }
 }
 
+/* ---- Lamp hint ----
+   A small "psst, click me" note pointing at the bulb for first-time
+   visitors — see assets/lamp-hint.js. Anchored off the SAME clamp()
+   expression as .hero__lamp's own width, so its top edge tracks the
+   lamp's bottom edge at any viewport width instead of drifting apart
+   from it. `.is-dismissed` (added by the script, and persisted so it
+   never comes back) hides it outright; note this uses a class rather
+   than the `hidden` attribute, since `[hidden]`'s default display:none
+   would otherwise be overridden by this rule's own `display: flex`
+   (author styles beat the UA stylesheet regardless of order — the same
+   issue the project-filter tiles had). */
+.hero__hint {
+  position: absolute;
+  top: calc(-6px + clamp(110px, 12vw, 165px) * 1.18 + 6px);
+  right: clamp(18px, 3vw, 46px);
+  width: clamp(108px, 13vw, 148px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  pointer-events: none;
+}
+.hero__hint.is-dismissed { display: none; }
+
+.hero__hint-arrow {
+  width: clamp(26px, 3vw, 36px);
+  height: auto;
+  margin-bottom: 2px;
+  filter: invert(0);
+}
+[data-theme="dark"] .hero__hint-arrow { filter: invert(1); }
+
+.hero__hint-text {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .hero__hint { display: none; }
+}
+
 .hero__eyebrow {
   font-family: var(--font-ui);
   font-size: 0.8rem;
