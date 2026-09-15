@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume — Benjamin Wrinn</title>
+<meta name="description" content="Resume — Benjamin Wrinn, mechanical engineering student at Penn.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234A4A4A'/%3E%3Ctext x='50' y='66' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='%23F4F4F0' text-anchor='middle'%3EBW%3C/text%3E%3C/svg%3E">
+<meta name="color-scheme" content="light dark">
+<script src="assets/theme-init.js?v=2"></script>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a href="index.html#top" class="nav__logo">BW<span>.</span></a>
+
+  <nav class="nav__links">
+    <a href="index.html#projects">Projects</a>
+    <a href="index.html#about">About</a>
+  </nav>
+
+  <div class="nav__icons">
+    <a class="icon-btn" href="assets/resume.pdf" target="_blank" rel="noopener" title="Open resume PDF" aria-label="Open resume PDF in a new tab">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+    </a>
+    <button class="icon-btn icon-btn--theme" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.2M12 19.3v2.2M4.2 4.2l1.55 1.55M18.25 18.25l1.55 1.55M2.5 12h2.2M19.3 12h2.2M4.2 19.8l1.55-1.55M18.25 5.75l1.55-1.55"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="resume-main">
+  <div class="resume-main__head">
+    <h1>Benjamin Wrinn — Resume</h1>
+    <div class="resume-main__head-actions">
+      <a href="assets/resume.pdf" target="_blank" rel="noopener">Open in new tab &#8599;</a>
+      <a href="assets/resume.pdf" download="Benjamin-Wrinn-Resume.pdf" data-download-resume>Download &darr;</a>
+      <button type="button" class="icon-btn" data-download-resume title="Download resume PDF" aria-label="Download resume PDF">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="resume-embed">
+    <iframe data-src="assets/resume.pdf" title="Benjamin Wrinn's resume"></iframe>
+  </div>
+</main>
+
+<script src="assets/theme-toggle.js"></script>
+<script src="assets/resume-download.js"></script>
+</body>
+</html>
