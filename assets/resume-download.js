@@ -1,17 +1,24 @@
-/* Resume PDF runtime: download button behavior, plus a fallback for the
-   inline <iframe> preview when it can't be embedded. Shared by index.html
-   (the resume modal) and resume.html (the standalone page) so behavior
-   stays identical everywhere; include this script at the end of <body>,
-   after the relevant elements exist.
+/* Resume PDF runtime: download button behavior. Shared by index.html (the
+   resume modal) and resume.html (the standalone page) so behavior stays
+   identical everywhere; include this script at the end of <body>, after
+   the relevant elements exist.
 
-   Both concerns below split the same way: inside the hosted Claude
-   artifact preview there's no direct filesystem access and the page is
-   framed inside the platform's own sandboxed viewer, so some things that
-   work on a normal static host don't; on a normal static host (GitHub
-   Pages, your own domain, etc.) everything just works natively. We detect
-   "am I inside the hosted preview?" once, via whether `window.claude`
-   exists — it's injected synchronously by that viewer, independent of
-   whether any particular capability ends up granted. */
+   The inline preview itself is a plain pre-rendered <img> (see
+   assets/resume-preview.png) rather than a PDF embedded in an <iframe> —
+   that sidesteps every browser/extension inconsistency in how PDFs get
+   displayed (native viewer vs. a PDF-handling extension like Adobe
+   Acrobat's, each with its own toolbar/sidebar chrome that a page can't
+   reliably control) and guarantees every visitor sees the same clean,
+   full-size preview. The actual PDF is still what "Open in new tab" and
+   "Download" point to.
+
+   The download button has one wrinkle: inside the hosted Claude artifact
+   preview there's no direct filesystem access, so a plain download link
+   doesn't work there — we detect "am I inside the hosted preview?" via
+   whether `window.claude` exists (injected synchronously by that viewer)
+   and use its downloads capability instead. On a normal static host
+   (GitHub Pages, your own domain, etc.) the plain download link just
+   works natively. */
 (function () {
   var RESUME_PDF = "assets/resume.pdf";
   var RESUME_FILENAME = "Benjamin-Wrinn-Resume.pdf";
@@ -19,8 +26,6 @@
   function inHostedPreview() {
     return !!(window.claude && typeof window.claude.use === "function");
   }
-
-  /* ---- Download button(s): "Download" text link + download icon ---- */
 
   function fallbackDownload() {
     var a = document.createElement("a");
@@ -56,38 +61,5 @@
       e.preventDefault();
       downloadResume();
     });
-  });
-
-  /* ---- Inline <iframe> preview ----
-     The iframe below is built with [data-src] instead of [src] so it never
-     auto-loads — we decide what to do with it here, once, instead of
-     letting the browser start fetching it as soon as the tag is parsed.
-     Inside the hosted preview, framing a PDF inline is blocked by that
-     viewer's own sandboxing (Chrome shows "This page has been blocked by
-     Chrome" in the frame), even though the exact same markup renders the
-     PDF fine on a real static host — so there, swap in a plain message and
-     link instead of ever attempting the frame. On a real static host,
-     just activate the iframe normally. */
-
-  document.querySelectorAll(".resume-embed, .resume-modal__embed").forEach(function (container) {
-    var iframe = container.querySelector("iframe[data-src]");
-    if (!iframe) return;
-    if (inHostedPreview()) {
-      iframe.remove();
-      var fallback = document.createElement("div");
-      fallback.className = "resume-embed__fallback";
-      fallback.innerHTML =
-        "<p>Inline preview isn&rsquo;t available in this hosted preview.</p>" +
-        '<a href="' + RESUME_PDF + '" target="_blank" rel="noopener">Open the PDF in a new tab &#8599;</a>';
-      container.appendChild(fallback);
-    } else {
-      /* PDF open parameters (Chrome/Edge's built-in viewer, and mostly
-         Firefox's — Safari largely ignores these): navpanes=0 hides the
-         thumbnail/outline sidebar, toolbar=0 hides the viewer's own
-         toolbar (redundant with our Open/Download buttons above the
-         frame), and view=FitH scales the page to fill the frame's width
-         so it reads as large as possible. */
-      iframe.src = iframe.getAttribute("data-src") + "#toolbar=0&navpanes=0&view=FitH";
-    }
   });
 })();

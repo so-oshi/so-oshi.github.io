@@ -98,15 +98,29 @@ the same embed, in case you ever want a page you can link to directly
 `assets/` under that exact name and everything below works immediately —
 nothing else needs to change.
 
-The PDF is shown in an `<iframe>`, which every modern browser can render
-natively on a real deployed site. The hosted Claude preview is the one
-exception — its own sandboxing blocks framing a PDF inline no matter how
-it's embedded, so `assets/resume-download.js` detects that environment
-and swaps the iframe for a plain "open in a new tab" message there instead
-of showing a broken frame; on your actual deployed site it's untouched and
-just works. The iframe's `src` lives in a `data-src` attribute rather than
-`src` for exactly this reason — so it never starts loading until that
-script decides which of the two to do.
+The inline preview itself is a pre-rendered image, `assets/resume-preview.png`,
+not the PDF embedded live in an `<iframe>`. That's deliberate: a PDF framed
+inline is rendered by whatever the *visitor's* browser hands PDFs to —
+Chrome's own built-in viewer, Firefox's, or (for a lot of people) a
+third-party PDF extension like Adobe Acrobat's, each with its own toolbar
+and sidebar chrome that a page has very little control over, so the exact
+same embed can look completely different (and cluttered) from one visitor
+to the next. A plain image sidesteps all of that: it always looks exactly
+like it does in your editor, full width, no toolbar, no sidebar, for every
+visitor. "Open in new tab" and "Download" still point at the real PDF, so
+nothing about actually reading or saving the resume is lost.
+
+**If you update `assets/resume.pdf`, regenerate the preview image to match** —
+otherwise the preview and the real PDF will drift out of sync. With
+[poppler](https://poppler.freedesktop.org/) installed (`pdftocairo`, often
+already present on macOS/Linux, or via `brew install poppler` /
+`apt install poppler-utils`):
+
+```
+pdftocairo -png -r 250 -singlefile assets/resume.pdf assets/resume-preview
+```
+
+That renders page 1 at 250 DPI, which stays crisp even shown quite large.
 
 Both places also have a "Download" text link and a download icon button
 next to "Open in new tab" — either one saves the PDF to the visitor's
