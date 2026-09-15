@@ -1,5 +1,7 @@
 # Benjamin Wrinn — Engineering Portfolio
 
+W claude
+
 A static portfolio site. No build step, no framework — just `index.html`
 (the main page), `resume.html` (a second page embedding a resume PDF),
 `style.css`, `script.js`, and `assets/`.
