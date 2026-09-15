@@ -81,7 +81,13 @@
         '<a href="' + RESUME_PDF + '" target="_blank" rel="noopener">Open the PDF in a new tab &#8599;</a>';
       container.appendChild(fallback);
     } else {
-      iframe.src = iframe.getAttribute("data-src");
+      /* PDF open parameters (Chrome/Edge's built-in viewer, and mostly
+         Firefox's — Safari largely ignores these): navpanes=0 hides the
+         thumbnail/outline sidebar, toolbar=0 hides the viewer's own
+         toolbar (redundant with our Open/Download buttons above the
+         frame), and view=FitH scales the page to fill the frame's width
+         so it reads as large as possible. */
+      iframe.src = iframe.getAttribute("data-src") + "#toolbar=0&navpanes=0&view=FitH";
     }
   });
 })();

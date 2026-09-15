@@ -616,8 +616,8 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
 
 .resume-modal__panel {
   display: flex; flex-direction: column;
-  width: min(900px, 94vw);
-  height: 88vh;
+  width: min(1200px, 96vw);
+  height: 94vh;
   grid-template-columns: none; /* override .modal__panel's project-modal grid */
 }
 
