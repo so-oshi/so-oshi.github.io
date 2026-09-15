@@ -258,12 +258,6 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
   .hero__lamp { display: none; }
 }
 
-/* ---- Title row: "Benjamin Wrinn" + headshot photo, side by side ----
-   The lamp above stays position:absolute (out of flow), so it just floats
-   in its corner regardless of this row; hero__title-row reserves
-   padding-right on wider screens so the photo sits between the title text
-   and the lamp without ever reaching it. */
-
 .hero__eyebrow {
   font-family: var(--font-ui);
   font-size: 0.8rem;
@@ -273,25 +267,24 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
   margin: 0 0 16px;
 }
 
-.hero__title-row {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: clamp(16px, 3vw, 28px);
-  padding-right: clamp(0px, 24vw, 300px);
-  margin-bottom: 32px;
-}
-
 .hero__title {
   font-size: clamp(2.6rem, 7vw, 4.4rem);
   line-height: 1.0;
-  margin-bottom: 0;
+  margin-bottom: 32px;
 }
 
+/* ---- Headshot photo ----
+   Pinned with position:absolute, same trick as .hero__lamp above, so it
+   sits reliably in the gap between the title text and the lamp — never
+   wrapping onto its own line the way a flex layout would if the title
+   text happened to run long at a given width. Nudge `top`/`right` here to
+   reposition it; they're independent of the lamp's own offsets. */
+
 .hero__photo {
-  position: relative;
-  flex: 0 0 auto;
-  width: clamp(150px, 19vw, 260px);
+  position: absolute;
+  top: 90px;
+  right: clamp(140px, 18vw, 220px);
+  width: clamp(140px, 17vw, 240px);
   aspect-ratio: 4 / 5;
 }
 .hero__photo-img {
@@ -319,8 +312,11 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
 .hero__wave img { width: 68%; height: 68%; object-fit: contain; }
 
 @media (max-width: 760px) {
-  .hero__title-row { padding-right: 0; }
-  .hero__photo { width: clamp(110px, 30vw, 170px); }
+  .hero__photo {
+    position: static;
+    width: clamp(110px, 30vw, 170px);
+    margin: 0 0 24px;
+  }
 }
 
 .hero__actions { display: flex; gap: 14px; flex-wrap: wrap; }
