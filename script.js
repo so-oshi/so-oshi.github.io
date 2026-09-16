@@ -15,20 +15,23 @@ const PROJECTS = [
     title: "Industrial Battery Enclosure",
     tagline: "240 kWh / 120 kW BESS enclosure, thermally validated with FEA",
     tags: ["Mechanical Design", "Thermal FEA", "DFM", "SolidWorks"],
-    stats: ["7.2 × 4.5 × 3 ft", "2.75 tons", "240 kWh / 120 kW"],
+    stats: [],
     hero: IMG + "vero-enclosure-hero.jpg",
     gallery: [
       { src: IMG + "vero-enclosure-hero.jpg", caption: "Enclosure interior, door open — 5-module battery stack" },
-      { src: IMG + "vero-enclosure-front.jpg", caption: "Closed enclosure, front view" },
-      { src: IMG + "vero-enclosure-internal.jpg", caption: "Top-down internal layout" },
-      { src: IMG + "vero-enclosure-cutaway.jpg", caption: "Internal cutaway with battery + electronics bays" },
+      { src: IMG + "vero-enclosure-full-render.jpg", caption: "Full enclosure assembly — investor-facing CAD render" },
+      { src: IMG + "vero-enclosure-workstation.jpg", caption: "Modeling the enclosure in SolidWorks" },
       { src: IMG + "vero-enclosure-fea.jpg", caption: "Front door panel FEA — von Mises stress" },
-      { src: IMG + "vero-enclosure-thermal-chart.jpg", caption: "Panel temperature comparison across shielding configurations" }
+      { src: IMG + "vero-enclosure-thermal-chart.jpg", caption: "Panel temperature comparison across shielding configurations" },
+      { src: IMG + "vero-enclosure-internal.jpg", caption: "High-voltage box — internal layout" },
+      { src: IMG + "vero-enclosure-cutaway.jpg", caption: "High-voltage box — cutaway view" }
     ],
     desc: [
       "Contracted to create a custom 240 kWh/120kW BESS enclosure fit for UL 9540A Standards.",
+      "7.2 × 4.5 × 3 ft, 2.75 tons.",
       "Used thermal simulation and FEA to drive design decisions — including thermal shielding panels and panel stiffening — validating that shielded panel temperatures ran well below unshielded and insulated configurations.",
-      "Produced investor-facing CAD renders and a custom high-voltage box, still in development."
+      "Produced investor-facing CAD renders and a custom high-voltage box, still in development.",
+      "Custom high voltage box for more efficient packaging."
     ]
   },
   {
@@ -42,11 +45,12 @@ const PROJECTS = [
     hero: IMG + "vero-board-hero.jpg",
     gallery: [
       { src: IMG + "vero-board-hero.jpg", caption: "BMS Node v1.1 — four-board strip, assembled" },
-      { src: IMG + "vero-board-bms-render-front.jpg", caption: "BMS Node — CAD render, front" },
-      { src: IMG + "vero-board-bms-render-angled.jpg", caption: "BMS Node — CAD render, angled" },
+      { src: IMG + "vero-board-node-closeup.jpg", caption: "BMS Node — board detail" },
+      { src: IMG + "vero-board-team-package.jpg", caption: "Boxed and ready — BMS Node and CAN Consolidator boards" },
+      { src: IMG + "vero-board-team-reaction.jpg", caption: "First look at the assembled boards" },
+      { src: IMG + "vero-board-bms-render-angled.jpg", caption: "BMS Node — CAD render, side" },
       { src: IMG + "vero-board-can-photo.jpg", caption: "CAN Consolidator board, assembled" },
-      { src: IMG + "vero-board-can-render-front.jpg", caption: "CAN Consolidator — CAD render, front" },
-      { src: IMG + "vero-board-can-render-angled.jpg", caption: "CAN Consolidator — CAD render, angled" }
+      { src: IMG + "vero-board-can-render-angled.jpg", caption: "CAN Consolidator — CAD render, side" }
     ],
     desc: [
       "Designed a 4-layer, high-voltage BMS Node PCB in KiCad, using four cell-monitor ICs to cover 64 series cells.",
@@ -141,26 +145,46 @@ const PROJECTS = [
     ]
   },
   {
+    id: "wind-up-toy",
+    org: "Coursework",
+    category: "Other",
+    title: "Wind up Toy",
+    tagline: "Dissected a wind-up toy in SolidWorks",
+    tags: ["SolidWorks", "Animation", "Reverse Engineering"],
+    stats: [],
+    hero: IMG + "wind-up-toy-cad.jpg",
+    gallery: [
+      { src: IMG + "wind-up-toy-cad.gif", caption: "SolidWorks animation of the reassembled model" },
+      { src: IMG + "wind-up-toy-photo.jpg", caption: "The toy, mid-teardown" },
+      { src: IMG + "wind-up-toy-reference.jpg", caption: "Reference photo used for measurements" }
+    ],
+    desc: [
+      "Disassembled a wind-up toy to measure and design each part in SolidWorks. Including gear ratios.",
+      "Reassembled the toy model in a SolidWorks animation."
+    ]
+  },
+  {
     id: "per-rookie",
     org: "Penn Electric Racing",
     category: "Penn Electric Racing",
     title: "Rookie Year: Fab, Composites & Renders",
     tagline: "Welding jigs, carbon-fiber layups, and Aero package renders",
-    tags: ["SolidWorks", "Composites", "Keyshot", "Rookie Year"],
-    stats: ["Chassis jigs", "Carbon-fiber layups", "Keyshot renders"],
-    hero: IMG + "per-rookie-hero.jpg",
+    tags: ["SolidWorks", "Composites", "Keyshot", "Chassis jigs", "Carbon-fiber layups"],
+    stats: [],
+    hero: IMG + "per-rookie-full-car.jpg",
     gallery: [
-      { src: IMG + "per-rookie-hero.jpg", caption: "Rear wing, exploded carbon-fiber assembly render" },
       { src: IMG + "per-rookie-team.jpg", caption: "Wet-layup trip to Leading Edge Composites" },
-      { src: IMG + "per-rookie-fea.jpg", caption: "Suspension control-arm tab FEA" },
-      { src: IMG + "per-rookie-suspension.jpg", caption: "Transparent render highlighting suspension geometry" },
-      { src: IMG + "per-rookie-jig.jpg", caption: "MDF welding jig for chassis tabs" }
+      { src: IMG + "per-rookie-fea.jpg", caption: "Brake reservoir mounting tab FEA" },
+      { src: IMG + "per-rookie-jig.jpg", caption: "MDF welding jig for chassis tabs" },
+      { src: IMG + "per-rookie-full-car.jpg", caption: "Full car — Keyshot render" },
+      { src: IMG + "per-rookie-vehicle-views.jpg", caption: "Vehicle views — top, side, and front" },
+      { src: IMG + "per-rookie-hero.jpg", caption: "Rear wing, exploded carbon-fiber assembly render" }
     ],
     desc: [
-      "First-year rookie work on Penn Electric Racing's FSAE-Electric car: designed tabs and jigs in SolidWorks — including an MDF jig for precise welding — to connect and weld chassis components.",
-      "Traveled to sponsor Leading Edge Composites to perform wet layups of the car's carbon-fiber body panels.",
-      "Created formal design renders for the Aero package and full car in Keyshot, and built manufacturing cost reports and bills of materials for the team's Design and Cost presentation.",
-      "Ran suspension control-arm tab FEA to support the mechanical design."
+      "Designed tabs and jigs in SolidWorks: MDF jigs for precise welding of chassis components.",
+      "Learned FEA for my brake reservoir mounting tab.",
+      "Traveled to our sponsor Leading Edge Composites to perform wet layups for the car's carbon-fiber body panels.",
+      "Created formal design renders for the Aero package and full car in Keyshot, and built manufacturing cost reports and bills of materials for the team's Design and Cost presentation."
     ]
   }
 ];
@@ -176,6 +200,7 @@ PROJECTS.forEach((p, index) => {
   tile.className = "tile";
   tile.setAttribute("data-index", index);
   tile.setAttribute("data-category", p.category);
+  tile.setAttribute("data-id", p.id);
   tile.innerHTML = `
     <img class="tile__img" src="${p.hero}" alt="${p.title}" loading="lazy">
     <div class="tile__scrim"></div>
@@ -248,6 +273,7 @@ function openModal(index) {
   modalTitle.textContent = activeProject.title;
   modalTags.innerHTML = activeProject.tags.map(t => `<span>${t}</span>`).join("");
   modalStats.innerHTML = activeProject.stats.map(s => `<span>${s}</span>`).join("");
+  modalStats.style.display = activeProject.stats.length ? "" : "none";
   modalDesc.innerHTML = activeProject.desc.map(d => `<p>${d}</p>`).join("");
   renderDots();
   showImage(0);

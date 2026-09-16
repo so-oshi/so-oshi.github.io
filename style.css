@@ -493,6 +493,12 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
   transition: transform .6s cubic-bezier(.2,.8,.2,1), filter .5s ease;
   filter: saturate(0.94) brightness(0.96);
 }
+/* Wind up Toy's CAD screenshot has a lot of empty space around the model —
+   nudge the visible crop so the toy sits closer to center. */
+.tile[data-id="wind-up-toy"] .tile__img {
+  object-position: 62% 50%;
+}
+
 .tile:hover .tile__img, .tile:focus-visible .tile__img {
   transform: scale(1.08);
   filter: saturate(1.05) brightness(1);
@@ -508,11 +514,8 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
 
 .tile__content {
   position: absolute; left: 0; right: 0; bottom: 0;
-  padding: 16px 18px;
-  transform: translateY(30px);
-  transition: transform .4s cubic-bezier(.2,.8,.2,1);
+  padding: 16px 18px 18px;
 }
-.tile:hover .tile__content, .tile:focus-visible .tile__content { transform: translateY(0); }
 
 .tile__org {
   font-family: var(--font-ui);
@@ -548,10 +551,9 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
   font-weight: 600;
 }
 
-/* Touch devices: no hover, so keep title/org visible by default */
+/* Touch devices: no hover, so keep the tagline visible by default */
 @media (hover: none) {
   .tile__scrim { opacity: 0.88; }
-  .tile__content { transform: translateY(0); }
   .tile__tagline { max-height: 60px; opacity: 1; }
 }
 
