@@ -493,12 +493,6 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
   transition: transform .6s cubic-bezier(.2,.8,.2,1), filter .5s ease;
   filter: saturate(0.94) brightness(0.96);
 }
-/* Wind up Toy's CAD screenshot has a lot of empty space around the model —
-   nudge the visible crop so the toy sits closer to center. */
-.tile[data-id="wind-up-toy"] .tile__img {
-  object-position: 62% 50%;
-}
-
 .tile:hover .tile__img, .tile:focus-visible .tile__img {
   transform: scale(1.08);
   filter: saturate(1.05) brightness(1);

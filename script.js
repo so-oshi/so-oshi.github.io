@@ -62,18 +62,19 @@ const PROJECTS = [
     id: "dynamometer",
     org: "Penn Electric Racing",
     category: "Penn Electric Racing",
-    title: "Regen-Capable Dynamometer",
+    title: "Electric Dynamometer",
     tagline: "Custom brake-absorption dyno for gearbox validation",
-    tags: ["Mechanical Design", "Powertrain", "Ongoing"],
-    stats: ["500 N·m shaft torque", "20,000 RPM max"],
+    tags: ["SolidWorks", "Powertrain", "Ongoing"],
+    stats: [],
     hero: IMG + "per-dyno-hero.jpg",
     gallery: [
       { src: IMG + "per-dyno-hero.jpg", caption: "Brake-absorption dynamometer — CAD assembly" }
     ],
     desc: [
-      "Designing a custom, brake-absorption dynamometer for design validation and gearbox wear-in testing on Penn Electric Racing's FSAE-Electric powertrain.",
-      "Mechanical design supports future regenerative-braking testing and gearbox changes without a full rebuild.",
-      "Sized to accommodate max loads of 500 N·m shaft torque at 20,000 RPM."
+      "Designing a custom, brake-absorption dynamometer for design validation and gearbox wear-in testing.",
+      "Mechanical design supports future regenerative-braking testing and gearbox changes without a rebuild.",
+      "Load cell measures within ±1 N·m, allowing us to quantify gearbox efficiency changes as it wears.",
+      "Sized to accommodate max loads of 500 N·m shaft torque, and max RPM of 20,000."
     ]
   },
   {
