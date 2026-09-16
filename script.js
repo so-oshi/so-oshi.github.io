@@ -26,7 +26,7 @@ const PROJECTS = [
       { src: IMG + "vero-enclosure-thermal-chart.jpg", caption: "Panel temperature comparison across shielding configurations" }
     ],
     desc: [
-      "Designed a 240 kWh / 120 kW battery energy storage system (BESS) enclosure for Powertown, a Harvard-based energy storage startup.",
+      "Contracted to create a custom 240 kWh/120kW BESS enclosure fit for UL 9540A Standards.",
       "Used thermal simulation and FEA to drive design decisions — including thermal shielding panels and panel stiffening — validating that shielded panel temperatures ran well below unshielded and insulated configurations.",
       "Produced investor-facing CAD renders and a custom high-voltage box, still in development."
     ]
@@ -38,16 +38,18 @@ const PROJECTS = [
     title: "BMS & CAN Bus Board Design",
     tagline: "4-layer, 64-series-cell BMS node PCB designed in KiCad",
     tags: ["PCB Design", "KiCad", "High-Voltage", "4-Layer"],
-    stats: ["64S BMS Node", "4× BQ79616", "4-Layer PCB"],
+    stats: ["64S BMS Node", "4× Cell-Monitor ICs", "4-Layer PCB"],
     hero: IMG + "vero-board-hero.jpg",
     gallery: [
       { src: IMG + "vero-board-hero.jpg", caption: "BMS Node v1.1 — four-board strip, assembled" },
-      { src: IMG + "vero-board-bms-layout.jpg", caption: "KiCad routing — BMS Node v1.1" },
+      { src: IMG + "vero-board-bms-render-front.jpg", caption: "BMS Node — CAD render, front" },
+      { src: IMG + "vero-board-bms-render-angled.jpg", caption: "BMS Node — CAD render, angled" },
       { src: IMG + "vero-board-can-photo.jpg", caption: "CAN Consolidator board, assembled" },
-      { src: IMG + "vero-board-can-layout.jpg", caption: "KiCad routing — CAN Consolidator v1.2" }
+      { src: IMG + "vero-board-can-render-front.jpg", caption: "CAN Consolidator — CAD render, front" },
+      { src: IMG + "vero-board-can-render-angled.jpg", caption: "CAN Consolidator — CAD render, angled" }
     ],
     desc: [
-      "Designed a 4-layer, high-voltage BMS Node PCB in KiCad, using four BQ79616 battery-monitor ICs to cover 64 series cells.",
+      "Designed a 4-layer, high-voltage BMS Node PCB in KiCad, using four cell-monitor ICs to cover 64 series cells.",
       "Designed a simple CAN bus consolidator / breakout board for the enclosure's EMS, with differential-pair routing and a center-hub layout.",
       "Both boards were fabricated, hand-assembled, and bring-up tested."
     ]
@@ -180,8 +182,7 @@ PROJECTS.forEach((p, index) => {
     <div class="tile__content">
       <p class="tile__org">${p.org}</p>
       <h3 class="tile__title">${p.title}</h3>
-      <p class="tile__tagline">${p.tagline}</p>
-      <span class="tile__cue">View case study &rarr;</span>
+      <p class="tile__tagline">${p.tagline} <span class="tile__tagline-arrow">&rarr;</span></p>
     </div>
   `;
   tile.addEventListener("click", () => openModal(index));
@@ -393,6 +394,15 @@ document.getElementById("emailBtn").addEventListener("click", copyEmail);
 document.getElementById("emailPopoverBtn").addEventListener("click", copyEmail);
 document.getElementById("phoneBtn").addEventListener("click", copyPhone);
 document.getElementById("phonePopoverBtn").addEventListener("click", copyPhone);
+
+const contactEmailBtn = document.getElementById("contactEmailBtn");
+const contactEmailPopoverBtn = document.getElementById("contactEmailPopoverBtn");
+const contactPhoneBtn = document.getElementById("contactPhoneBtn");
+const contactPhonePopoverBtn = document.getElementById("contactPhonePopoverBtn");
+if (contactEmailBtn) contactEmailBtn.addEventListener("click", copyEmail);
+if (contactEmailPopoverBtn) contactEmailPopoverBtn.addEventListener("click", copyEmail);
+if (contactPhoneBtn) contactPhoneBtn.addEventListener("click", copyPhone);
+if (contactPhonePopoverBtn) contactPhonePopoverBtn.addEventListener("click", copyPhone);
 
 /* ==========================================================================
    Misc
