@@ -565,9 +565,11 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
 
 .contact__grid {
   display: grid;
-  grid-template-columns: minmax(280px, 440px) 1fr;
+  grid-template-columns: minmax(280px, 440px) minmax(280px, 440px);
   gap: 48px;
   align-items: center;
+  max-width: 928px;
+  margin: 0 auto;
 }
 
 .contact__photo {
@@ -577,8 +579,18 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
 .contact__edu {
   font-size: 1.05rem;
   line-height: 1.55;
-  margin: 0;
-  max-width: 420px;
+  margin: 0 0 14px;
+}
+.contact__edu:last-of-type {
+  margin-bottom: 0;
+}
+
+.contact__link {
+  color: var(--accent);
+  text-underline-offset: 2px;
+}
+.contact__link:hover {
+  text-decoration: underline;
 }
 
 .contact__cta {
@@ -594,12 +606,12 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
   gap: 18px;
 }
 .contact__icons .icon-btn {
-  width: 54px;
-  height: 54px;
+  width: 62px;
+  height: 62px;
 }
 .contact__icons .icon-btn svg {
-  width: 24px;
-  height: 24px;
+  width: 27px;
+  height: 27px;
 }
 .contact__icons .icon-popover {
   font-size: 0.9rem;
@@ -609,6 +621,7 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
   .contact__grid {
     grid-template-columns: 1fr;
     gap: 24px;
+    max-width: 100%;
   }
   .civil-slideshow {
     max-width: 320px;

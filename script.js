@@ -20,11 +20,12 @@ const PROJECTS = [
     gallery: [
       { src: IMG + "vero-enclosure-hero.jpg", caption: "Enclosure interior, door open — 5-module battery stack" },
       { src: IMG + "vero-enclosure-full-render.jpg", caption: "Full enclosure assembly — investor-facing CAD render" },
-      { src: IMG + "vero-enclosure-workstation.jpg", caption: "Modeling the enclosure in SolidWorks" },
+      { src: IMG + "vero-enclosure-team-unbox.jpg", caption: "Unboxing and inspecting a battery module" },
       { src: IMG + "vero-enclosure-fea.jpg", caption: "Front door panel FEA — von Mises stress" },
       { src: IMG + "vero-enclosure-thermal-chart.jpg", caption: "Panel temperature comparison across shielding configurations" },
       { src: IMG + "vero-enclosure-internal.jpg", caption: "High-voltage box — internal layout" },
-      { src: IMG + "vero-enclosure-cutaway.jpg", caption: "High-voltage box — cutaway view" }
+      { src: IMG + "vero-enclosure-cutaway.jpg", caption: "High-voltage box — cutaway view" },
+      { src: IMG + "vero-enclosure-workstation.jpg", caption: "Modeling the enclosure in SolidWorks" }
     ],
     desc: [
       "Contracted to create a custom 240 kWh/120kW BESS enclosure fit for UL 9540A Standards.",
