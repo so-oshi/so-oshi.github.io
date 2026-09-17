@@ -823,12 +823,48 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
   max-height: 88vh;
   border: none; /* iframe (YouTube embed) also uses this class */
 }
+/* Gallery items can declare an `aspect` (e.g. "9/16" for a vertical video)
+   via script.js's applyGalleryAspect(), which sets --gallery-aspect and this
+   attribute. That lets the box itself take on the content's own shape —
+   full-bleed, no letterbox bars — instead of staying the fixed, wider
+   landscape-ish box above (which items with no `aspect` keep using). The
+   [data-aspect] compound selector out-specifies both the base rule and the
+   760px-breakpoint override below, so it wins at any viewport width. */
+.modal__gallery[data-aspect] {
+  aspect-ratio: var(--gallery-aspect);
+  min-height: 0;
+  max-height: 88vh;
+}
+.modal__gallery[data-aspect] .modal__image {
+  object-fit: cover;
+}
+@media (min-width: 761px) {
+  /* Narrow the gallery's grid column for a portrait item so a 9:16 video
+     doesn't inherit the wide ~1.3fr landscape column and blow up the
+     panel's height — set by script.js alongside the aspect-ratio itself. */
+  .modal__panel.is-portrait-gallery {
+    grid-template-columns: minmax(220px, 380px) 1fr;
+  }
+}
+/* Same gotcha as .tile[hidden] above: the global `img { display: block; }`
+   rule is an author-stylesheet rule, so it beats the UA stylesheet's
+   `[hidden] { display: none; }` regardless of specificity — without this,
+   a "hidden" #modalImage stays display:block and its src (set to "" when
+   a video/embed slide is active, which resolves to the page's OWN url)
+   renders as a broken-image icon sitting on top of the video/iframe. */
+.modal__image[hidden] {
+  display: none;
+}
 
 .modal__nav {
   position: absolute; top: 50%; transform: translateY(-50%);
   width: 38px; height: 38px; border-radius: 50%;
   background: rgba(20,20,20,0.5); border: 1px solid rgba(255,255,255,0.2);
   color: #fff; font-size: 1.4rem; cursor: pointer;
+  z-index: 4; /* #galPrev sits before #modalImage/#modalVideo/#modalEmbed in the
+    markup, and all of them are position:absolute with no explicit stacking
+    order, so without this the media element (later in DOM order) painted on
+    top and silently ate every click on the prev button. */
 }
 .modal__nav--prev { left: 12px; }
 .modal__nav--next { right: 12px; }
@@ -837,6 +873,7 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
 .modal__dots {
   position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
   display: flex; gap: 6px;
+  z-index: 4;
 }
 .modal__dots span {
   width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.35);

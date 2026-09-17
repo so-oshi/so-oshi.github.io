@@ -195,15 +195,15 @@ const PROJECTS = [
     id: "video-editor",
     org: "Personal",
     category: "Other",
-    title: "Video Editor",
+    title: "Video Editing",
     tagline: "Aerospace Media Lead and personal projects in DaVinci Resolve",
-    tags: ["DaVinci Resolve", "Video Editing"],
+    tags: ["DaVinci Resolve", "Social Media"],
     stats: [],
     hero: IMG + "video-editor-hero.jpg",
     gallery: [
-      { src: IMG + "video-editor-indycar.mp4", type: "video", poster: IMG + "video-editor-indycar-poster.jpg", caption: "Raw camcorder footage — Portland International Raceway, 2025 Indycar race" },
-      { src: "https://www.youtube.com/embed/Zv8gEoWAbfQ", type: "youtube", caption: "OES Aerospace — Qualification Gathering Video" },
-      { src: IMG + "video-editor-daikoku.mp4", type: "video", poster: IMG + "video-editor-daikoku-poster.jpg", caption: "Daikoku Parking Area, Yokohama — night car meet edit" }
+      { src: IMG + "video-editor-indycar.mp4", type: "video", poster: IMG + "video-editor-indycar-poster.jpg", caption: "Raw camcorder footage — Portland International Raceway, 2025 Indycar race", aspect: "9/16" },
+      { src: "https://www.youtube.com/embed/Zv8gEoWAbfQ", type: "youtube", caption: "OES Aerospace — Qualification Gathering Video", aspect: "16/9" },
+      { src: IMG + "video-editor-daikoku.mp4", type: "video", poster: IMG + "video-editor-daikoku-poster.jpg", caption: "Daikoku Parking Area, Yokohama — night car meet edit", aspect: "9/16" }
     ],
     desc: [
       "Grew team Instagram by +5.5k followers and +350k interactions as Media Lead, driving sponsor visibility and recruitment through edited videos.",
@@ -278,6 +278,8 @@ if (filterBar) {
    ========================================================================== */
 
 const modal = document.getElementById("modal");
+const modalPanel = document.getElementById("modalPanel");
+const modalGallery = document.getElementById("modalGallery");
 const modalImage = document.getElementById("modalImage");
 const modalVideo = document.getElementById("modalVideo");
 const modalEmbed = document.getElementById("modalEmbed");
@@ -312,7 +314,24 @@ function closeModal() {
   modal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
   modalVideo.pause();
-  modalEmbed.src = ""; // clearing src is what actually stops an embedded YouTube player
+  modalEmbed.removeAttribute("src"); // clearing src is what actually stops an embedded YouTube player
+}
+
+// Gallery items may declare an `aspect` (CSS aspect-ratio value, e.g. "9/16")
+// so the box itself can match a vertical video's shape instead of staying a
+// fixed landscape-ish box with the content letterboxed inside it. Items with
+// no `aspect` fall back to the original fixed-box/object-fit:contain layout.
+function applyGalleryAspect(item) {
+  if (item.aspect) {
+    modalGallery.style.setProperty("--gallery-aspect", item.aspect);
+    modalGallery.setAttribute("data-aspect", "");
+    const [w, h] = item.aspect.split("/").map(Number);
+    modalPanel.classList.toggle("is-portrait-gallery", w < h);
+  } else {
+    modalGallery.style.removeProperty("--gallery-aspect");
+    modalGallery.removeAttribute("data-aspect");
+    modalPanel.classList.remove("is-portrait-gallery");
+  }
 }
 
 function showImage(i) {
@@ -321,10 +340,11 @@ function showImage(i) {
   activeImage = (i + total) % total;
   const item = activeProject.gallery[activeImage];
   modalVideo.pause();
-  modalEmbed.src = "";
+  modalEmbed.removeAttribute("src");
+  applyGalleryAspect(item);
   if (item.type === "video") {
     modalImage.hidden = true;
-    modalImage.src = "";
+    modalImage.removeAttribute("src");
     modalEmbed.hidden = true;
     modalVideo.hidden = false;
     modalVideo.poster = item.poster || "";
@@ -332,15 +352,15 @@ function showImage(i) {
     modalVideo.setAttribute("aria-label", item.caption || activeProject.title);
   } else if (item.type === "youtube") {
     modalImage.hidden = true;
-    modalImage.src = "";
+    modalImage.removeAttribute("src");
     modalVideo.hidden = true;
-    modalVideo.src = "";
+    modalVideo.removeAttribute("src");
     modalEmbed.hidden = false;
     modalEmbed.src = item.src;
     modalEmbed.title = item.caption || activeProject.title;
   } else {
     modalVideo.hidden = true;
-    modalVideo.src = "";
+    modalVideo.removeAttribute("src");
     modalEmbed.hidden = true;
     modalImage.hidden = false;
     modalImage.src = item.src;
@@ -498,7 +518,9 @@ const CIVIL_PHOTOS = [
   { src: IMG + "civil-7.jpg" },
   { src: IMG + "civil-8.jpg" },
   { src: IMG + "civil-9.jpg" },
-  { src: IMG + "civil-baking.jpg" }
+  { src: IMG + "civil-baking-1.jpg" },
+  { src: IMG + "civil-baking-2.jpg" },
+  { src: IMG + "civil-baking-3.jpg" }
 ].map((p, i) => ({ ...p, caption: p.caption || "placeholder" + (i + 1) }));
 
 let civilIndex = 0;
