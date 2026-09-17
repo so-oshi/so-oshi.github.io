@@ -503,8 +503,9 @@ if (contactPhonePopoverBtn) contactPhonePopoverBtn.addEventListener("click", cop
 
 /* ==========================================================================
    Civilian life slideshow + lightbox
-   Captions are placeholders ("placeholder1", "placeholder2", ...) until real
-   captions are written — just update the `caption` field per photo below.
+   Photos with no `caption` field just show no caption text (the alt text
+   still falls back to something readable) — add a `caption` per photo
+   below whenever there's real text to show.
    ========================================================================== */
 
 const CIVIL_PHOTOS = [
@@ -521,7 +522,7 @@ const CIVIL_PHOTOS = [
   { src: IMG + "civil-baking-1.jpg" },
   { src: IMG + "civil-baking-2.jpg" },
   { src: IMG + "civil-baking-3.jpg" }
-].map((p, i) => ({ ...p, caption: p.caption || "placeholder" + (i + 1) }));
+].map((p, i) => ({ ...p, alt: p.caption || "Photo " + (i + 1) }));
 
 let civilIndex = 0;
 
@@ -544,8 +545,9 @@ function renderCivilSlide() {
   civilIndex = (civilIndex + total) % total;
   const item = CIVIL_PHOTOS[civilIndex];
   civilImage.src = item.src;
-  civilImage.alt = item.caption;
-  civilCaption.textContent = item.caption;
+  civilImage.alt = item.alt;
+  civilCaption.textContent = item.caption || "";
+  civilCaption.hidden = !item.caption;
   if (civilLightbox.classList.contains("is-open")) {
     renderCivilLightbox();
   }
@@ -554,8 +556,9 @@ function renderCivilSlide() {
 function renderCivilLightbox() {
   const item = CIVIL_PHOTOS[civilIndex];
   civilLightboxImage.src = item.src;
-  civilLightboxImage.alt = item.caption;
-  civilLightboxCaption.textContent = item.caption;
+  civilLightboxImage.alt = item.alt;
+  civilLightboxCaption.textContent = item.caption || "";
+  civilLightboxCaption.hidden = !item.caption;
 }
 
 function openCivilLightbox() {

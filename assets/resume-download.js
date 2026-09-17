@@ -20,7 +20,7 @@
    (GitHub Pages, your own domain, etc.) the plain download link just
    works natively. */
 (function () {
-  var RESUME_PDF = "assets/resume.pdf";
+  var RESUME_PDF = "assets/resume.pdf?v=2";
   var RESUME_FILENAME = "Benjamin-Wrinn-Resume.pdf";
 
   function inHostedPreview() {
