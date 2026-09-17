@@ -128,24 +128,24 @@ const PROJECTS = [
     category: "Other",
     title: "CAM Assay Rapid Prototyping",
     tagline: "Low-cost camera monitoring for quail embryo drug trials",
-    tags: ["Rapid Prototyping", "OpenCV", "Python", "3D Printing"],
-    stats: ["OpenCV + Python", "3D-printed macro mounts"],
+    tags: ["OpenCV", "Python", "3D Printing"],
+    stats: [],
     hero: IMG + "cam-video-thumb.jpg",
     gallery: [
-      { src: IMG + "cam-video-macro.mp4", type: "video", caption: "Live macro-lens footage of the CAM assay" },
-      { src: IMG + "cam-video-contour.mp4", type: "video", caption: "OpenCV contour tracking — live bounding-box detection" },
+      { src: IMG + "cam-video-macro.mp4", type: "video", poster: IMG + "cam-video-macro-poster.jpg", caption: "Live macro-lens footage of the CAM assay" },
+      { src: IMG + "cam-video-contour.mp4", type: "video", poster: IMG + "cam-video-contour-poster.jpg", caption: "OpenCV contour tracking — live bounding-box detection" },
       { src: IMG + "cam-tracking.jpg", caption: "OpenCV frame-difference tracking" },
       { src: IMG + "cam-hero.jpg", caption: "Quail CAM assay under the camera rig" },
       { src: IMG + "cam-camera-rig.jpg", caption: "GoPro + macro lens rig, 3D-printed mounts" },
       { src: IMG + "cam-sensor.jpg", caption: "Wyze camera used for continuous incubator monitoring" },
       { src: IMG + "cam-pixeldiff-chart.jpg", caption: "Pixel-diff signal across frames — motion/time-of-death detection" },
-      { src: IMG + "cam-video-incubator.mp4", type: "video", caption: "Wyze incubator camera feed, overnight monitoring" }
+      { src: IMG + "cam-video-incubator.mp4", type: "video", poster: IMG + "cam-video-incubator-poster.jpg", caption: "Wyze incubator camera feed, overnight monitoring" }
     ],
     desc: [
-      "Tested the feasibility of camera-based monitoring for quail CAM (chorioallantoic membrane) drug-trial assays at cc-TDI.",
-      "Built low-cost camera rigs from Wyze security cameras and GoPros, with 3D-printed macro-lens mounts and visible / IR lighting inside the incubator.",
-      "Wrote Python / OpenCV image analysis to track embryo movement and estimate time of death from frame-to-frame pixel change.",
-      "The prototype gave cc-TDI enough confidence in the approach to pursue it as a commercial product."
+      "Tested feasibility of camera-based monitoring for quail embryo / CAM assay drug-trial at cc-TDI.",
+      "Built low-cost camera rigs from Wyze security cameras and GoPros, with 3D-printed mounts for both macro-lenses and incubator IR / visible lighting.",
+      "Wrote Python / OpenCV image analysis to track embryo movement and monitor embryo health from frame-to-frame pixel change.",
+      "The prototype helped give cc-TDI confidence in the approach to pursue it as a commercial product."
     ]
   },
   {
@@ -304,6 +304,7 @@ function showImage(i) {
     modalImage.hidden = true;
     modalImage.src = "";
     modalVideo.hidden = false;
+    modalVideo.poster = item.poster || "";
     modalVideo.src = item.src;
     modalVideo.setAttribute("aria-label", item.caption || activeProject.title);
   } else {
@@ -455,7 +456,7 @@ if (contactPhonePopoverBtn) contactPhonePopoverBtn.addEventListener("click", cop
    ========================================================================== */
 
 const CIVIL_PHOTOS = [
-  { src: IMG + "ben-contact.jpg" },
+  { src: IMG + "ben-contact.jpg", caption: "Tap the arrows for more" },
   { src: IMG + "civil-1.jpg" },
   { src: IMG + "civil-2.jpg" },
   { src: IMG + "civil-3.jpg" },
@@ -465,7 +466,7 @@ const CIVIL_PHOTOS = [
   { src: IMG + "civil-7.jpg" },
   { src: IMG + "civil-8.jpg" },
   { src: IMG + "civil-9.jpg" }
-].map((p, i) => ({ ...p, caption: "placeholder" + (i + 1) }));
+].map((p, i) => ({ ...p, caption: p.caption || "placeholder" + (i + 1) }));
 
 let civilIndex = 0;
 

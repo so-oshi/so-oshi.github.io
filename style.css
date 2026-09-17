@@ -378,7 +378,17 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
 
 @media (max-width: 760px) {
   .hero__photo {
-    position: static;
+    /* Was position:static — but .hero__wave is positioned (absolute) against
+       .hero__photo specifically, and static no longer qualifies as a
+       positioning context, so the wave badge fell back to the next
+       positioned ancestor up the tree (.hero itself, position:relative,
+       full section width) and rendered huge and misplaced. `relative`
+       keeps the exact same static-like flow placement (no offsets set)
+       while keeping the wave badge correctly tied to the photo at any
+       screen size. */
+    position: relative;
+    top: auto;
+    right: auto;
     width: clamp(110px, 30vw, 170px);
     margin: 0 0 24px;
   }
@@ -797,10 +807,21 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
 
 .modal__gallery {
   position: relative; background: #000;
-  display: flex; align-items: center; justify-content: center;
   min-height: 300px;
+  overflow: hidden;
 }
-.modal__image { width: 100%; height: 100%; object-fit: contain; max-height: 88vh; }
+/* Absolutely positioned (rather than sized as a flex child) so a <video>
+   with no metadata loaded yet can't fall back to its UA default 300x150
+   box before its real dimensions are known — that fallback briefly ignored
+   width:100% as a flex child and clipped/shifted the frame until the
+   video's metadata arrived. inset:0 sizes it from the (position:relative)
+   .modal__gallery box unconditionally, no intrinsic size needed. */
+.modal__image {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  max-height: 88vh;
+}
 
 .modal__nav {
   position: absolute; top: 50%; transform: translateY(-50%);
