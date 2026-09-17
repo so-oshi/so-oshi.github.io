@@ -31,17 +31,18 @@ const PROJECTS = [
       "7.2 × 4.5 × 3 ft, 2.75 tons.",
       "Used thermal simulation and FEA to drive design decisions — including thermal shielding panels and panel stiffening — validating that shielded panel temperatures ran well below unshielded and insulated configurations.",
       "Produced investor-facing CAD renders and a custom high-voltage box, still in development.",
-      "Custom high voltage box for more efficient packaging."
+      "Custom high voltage box for more efficient packaging.",
+      "Targeting a UL 9540A burn test by the end of the calendar year."
     ]
   },
   {
     id: "vero-board",
     org: "Vero Electric",
     category: "Vero Electric",
-    title: "BMS & CAN Bus Board Design",
+    title: "BMS Node & CAN Bus Board Design",
     tagline: "4-layer, 64-series-cell BMS node PCB designed in KiCad",
-    tags: ["PCB Design", "KiCad", "High-Voltage", "4-Layer"],
-    stats: ["64S BMS Node", "4× Cell-Monitor ICs", "4-Layer PCB"],
+    tags: ["PCB Design", "KiCad", "4-Layer"],
+    stats: [],
     hero: IMG + "vero-board-hero.jpg",
     gallery: [
       { src: IMG + "vero-board-hero.jpg", caption: "BMS Node v1.1 — four-board strip, assembled" },
@@ -109,10 +110,7 @@ const PROJECTS = [
     gallery: [
       { src: IMG + "arc-hero.jpg", caption: "CFD velocity streamlines over the airframe" },
       { src: IMG + "arc-flightcomputer-photo.jpg", caption: "Assembled flight computer PCB" },
-      { src: IMG + "arc-board-red.jpg", caption: "Flight computer layout, rev. A" },
-      { src: IMG + "arc-board-green.jpg", caption: "Flight computer layout, rev. B" },
-      { src: IMG + "arc-board-gold.jpg", caption: "Flight computer layout, rev. C" },
-      { src: IMG + "arc-board-blue.jpg", caption: "Flight computer layout, rev. D" },
+      { src: IMG + "arc-board-layers.jpg", caption: "Flight computer PCB — four layer copper pours" },
       { src: IMG + "arc-acs.jpg", caption: "Active Control System (ACS) flap mechanism" },
       { src: IMG + "arc-dcs.jpg", caption: "Descent Control System housing" }
     ],
@@ -131,12 +129,16 @@ const PROJECTS = [
     tagline: "Low-cost camera monitoring for quail embryo drug trials",
     tags: ["Rapid Prototyping", "OpenCV", "Python", "3D Printing"],
     stats: ["OpenCV + Python", "3D-printed macro mounts"],
-    hero: IMG + "cam-hero.jpg",
+    hero: IMG + "cam-video-thumb.jpg",
     gallery: [
+      { src: IMG + "cam-video-macro.mp4", type: "video", caption: "Live macro-lens footage of the CAM assay" },
+      { src: IMG + "cam-video-contour.mp4", type: "video", caption: "OpenCV contour tracking — live bounding-box detection" },
+      { src: IMG + "cam-tracking.jpg", caption: "OpenCV frame-difference tracking" },
       { src: IMG + "cam-hero.jpg", caption: "Quail CAM assay under the camera rig" },
       { src: IMG + "cam-camera-rig.jpg", caption: "GoPro + macro lens rig, 3D-printed mounts" },
       { src: IMG + "cam-sensor.jpg", caption: "Wyze camera used for continuous incubator monitoring" },
-      { src: IMG + "cam-tracking.jpg", caption: "OpenCV frame-difference tracking" }
+      { src: IMG + "cam-pixeldiff-chart.jpg", caption: "Pixel-diff signal across frames — motion/time-of-death detection" },
+      { src: IMG + "cam-video-incubator.mp4", type: "video", caption: "Wyze incubator camera feed, overnight monitoring" }
     ],
     desc: [
       "Tested the feasibility of camera-based monitoring for quail CAM (chorioallantoic membrane) drug-trial assays at cc-TDI.",
@@ -257,6 +259,7 @@ if (filterBar) {
 
 const modal = document.getElementById("modal");
 const modalImage = document.getElementById("modalImage");
+const modalVideo = document.getElementById("modalVideo");
 const modalOrg = document.getElementById("modalOrg");
 const modalTitle = document.getElementById("modalTitle");
 const modalTags = document.getElementById("modalTags");
@@ -287,6 +290,7 @@ function closeModal() {
   modal.classList.remove("is-open");
   modal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
+  modalVideo.pause();
 }
 
 function showImage(i) {
@@ -294,8 +298,20 @@ function showImage(i) {
   const total = activeProject.gallery.length;
   activeImage = (i + total) % total;
   const item = activeProject.gallery[activeImage];
-  modalImage.src = item.src;
-  modalImage.alt = item.caption || activeProject.title;
+  modalVideo.pause();
+  if (item.type === "video") {
+    modalImage.hidden = true;
+    modalImage.src = "";
+    modalVideo.hidden = false;
+    modalVideo.src = item.src;
+    modalVideo.setAttribute("aria-label", item.caption || activeProject.title);
+  } else {
+    modalVideo.hidden = true;
+    modalVideo.src = "";
+    modalImage.hidden = false;
+    modalImage.src = item.src;
+    modalImage.alt = item.caption || activeProject.title;
+  }
   [...galDots.children].forEach((dot, idx) => {
     dot.classList.toggle("is-active", idx === activeImage);
   });
