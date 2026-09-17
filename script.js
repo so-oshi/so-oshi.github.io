@@ -448,6 +448,92 @@ if (contactPhoneBtn) contactPhoneBtn.addEventListener("click", copyPhone);
 if (contactPhonePopoverBtn) contactPhonePopoverBtn.addEventListener("click", copyPhone);
 
 /* ==========================================================================
+   Civilian life slideshow + lightbox
+   Captions are placeholders ("placeholder1", "placeholder2", ...) until real
+   captions are written — just update the `caption` field per photo below.
+   ========================================================================== */
+
+const CIVIL_PHOTOS = [
+  { src: IMG + "civil-1.jpg" },
+  { src: IMG + "civil-2.jpg" },
+  { src: IMG + "civil-3.jpg" },
+  { src: IMG + "civil-4.jpg" },
+  { src: IMG + "civil-5.jpg" },
+  { src: IMG + "civil-6.jpg" },
+  { src: IMG + "civil-7.jpg" },
+  { src: IMG + "civil-8.jpg" },
+  { src: IMG + "civil-9.jpg" }
+].map((p, i) => ({ ...p, caption: "placeholder" + (i + 1) }));
+
+let civilIndex = 0;
+
+const civilImage = document.getElementById("civilImage");
+const civilCaption = document.getElementById("civilCaption");
+const civilPrev = document.getElementById("civilPrev");
+const civilNext = document.getElementById("civilNext");
+const civilSlideBtn = document.getElementById("civilSlideBtn");
+
+const civilLightbox = document.getElementById("civilLightbox");
+const civilLightboxImage = document.getElementById("civilLightboxImage");
+const civilLightboxCaption = document.getElementById("civilLightboxCaption");
+const civilLightboxPrev = document.getElementById("civilLightboxPrev");
+const civilLightboxNext = document.getElementById("civilLightboxNext");
+const civilLightboxClose = document.getElementById("civilLightboxClose");
+const civilLightboxBackdrop = document.getElementById("civilLightboxBackdrop");
+
+function renderCivilSlide() {
+  const total = CIVIL_PHOTOS.length;
+  civilIndex = (civilIndex + total) % total;
+  const item = CIVIL_PHOTOS[civilIndex];
+  civilImage.src = item.src;
+  civilImage.alt = item.caption;
+  civilCaption.textContent = item.caption;
+  if (civilLightbox.classList.contains("is-open")) {
+    renderCivilLightbox();
+  }
+}
+
+function renderCivilLightbox() {
+  const item = CIVIL_PHOTOS[civilIndex];
+  civilLightboxImage.src = item.src;
+  civilLightboxImage.alt = item.caption;
+  civilLightboxCaption.textContent = item.caption;
+}
+
+function openCivilLightbox() {
+  renderCivilLightbox();
+  civilLightbox.classList.add("is-open");
+  civilLightbox.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+
+function closeCivilLightbox() {
+  civilLightbox.classList.remove("is-open");
+  civilLightbox.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
+if (civilSlideBtn) {
+  civilPrev.addEventListener("click", () => { civilIndex--; renderCivilSlide(); });
+  civilNext.addEventListener("click", () => { civilIndex++; renderCivilSlide(); });
+  civilSlideBtn.addEventListener("click", openCivilLightbox);
+
+  civilLightboxClose.addEventListener("click", closeCivilLightbox);
+  civilLightboxBackdrop.addEventListener("click", closeCivilLightbox);
+  civilLightboxPrev.addEventListener("click", () => { civilIndex--; renderCivilSlide(); });
+  civilLightboxNext.addEventListener("click", () => { civilIndex++; renderCivilSlide(); });
+
+  document.addEventListener("keydown", (e) => {
+    if (!civilLightbox.classList.contains("is-open")) return;
+    if (e.key === "Escape") closeCivilLightbox();
+    if (e.key === "ArrowLeft") { civilIndex--; renderCivilSlide(); }
+    if (e.key === "ArrowRight") { civilIndex++; renderCivilSlide(); }
+  });
+
+  renderCivilSlide();
+}
+
+/* ==========================================================================
    Misc
    ========================================================================== */
 
