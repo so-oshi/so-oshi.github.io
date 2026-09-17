@@ -454,6 +454,7 @@ if (contactPhonePopoverBtn) contactPhonePopoverBtn.addEventListener("click", cop
    ========================================================================== */
 
 const CIVIL_PHOTOS = [
+  { src: IMG + "ben-contact.jpg" },
   { src: IMG + "civil-1.jpg" },
   { src: IMG + "civil-2.jpg" },
   { src: IMG + "civil-3.jpg" },
