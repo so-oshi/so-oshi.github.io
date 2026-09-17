@@ -190,6 +190,25 @@ const PROJECTS = [
       "Traveled to our sponsor Leading Edge Composites to perform wet layups for the car's carbon-fiber body panels.",
       "Created formal design renders for the Aero package and full car in Keyshot, and built manufacturing cost reports and bills of materials for the team's Design and Cost presentation."
     ]
+  },
+  {
+    id: "video-editor",
+    org: "Personal",
+    category: "Other",
+    title: "Video Editor",
+    tagline: "Aerospace Media Lead and personal projects in DaVinci Resolve",
+    tags: ["DaVinci Resolve", "Video Editing"],
+    stats: [],
+    hero: IMG + "video-editor-hero.jpg",
+    gallery: [
+      { src: IMG + "video-editor-indycar.mp4", type: "video", poster: IMG + "video-editor-indycar-poster.jpg", caption: "Raw camcorder footage — Portland International Raceway, 2025 Indycar race" },
+      { src: "https://www.youtube.com/embed/Zv8gEoWAbfQ", type: "youtube", caption: "OES Aerospace — Qualification Gathering Video" },
+      { src: IMG + "video-editor-daikoku.mp4", type: "video", poster: IMG + "video-editor-daikoku-poster.jpg", caption: "Daikoku Parking Area, Yokohama — night car meet edit" }
+    ],
+    desc: [
+      "Grew team Instagram by +5.5k followers and +350k interactions as Media Lead, driving sponsor visibility and recruitment through edited videos.",
+      "Edited camcorder video for <a href=\"https://www.instagram.com/reel/DNgKfnMgBKg/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==\" target=\"_blank\" rel=\"noopener\">Portland International Raceway's</a> 2025 Indycar race."
+    ]
   }
 ];
 
@@ -261,6 +280,7 @@ if (filterBar) {
 const modal = document.getElementById("modal");
 const modalImage = document.getElementById("modalImage");
 const modalVideo = document.getElementById("modalVideo");
+const modalEmbed = document.getElementById("modalEmbed");
 const modalOrg = document.getElementById("modalOrg");
 const modalTitle = document.getElementById("modalTitle");
 const modalTags = document.getElementById("modalTags");
@@ -292,6 +312,7 @@ function closeModal() {
   modal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
   modalVideo.pause();
+  modalEmbed.src = ""; // clearing src is what actually stops an embedded YouTube player
 }
 
 function showImage(i) {
@@ -300,16 +321,27 @@ function showImage(i) {
   activeImage = (i + total) % total;
   const item = activeProject.gallery[activeImage];
   modalVideo.pause();
+  modalEmbed.src = "";
   if (item.type === "video") {
     modalImage.hidden = true;
     modalImage.src = "";
+    modalEmbed.hidden = true;
     modalVideo.hidden = false;
     modalVideo.poster = item.poster || "";
     modalVideo.src = item.src;
     modalVideo.setAttribute("aria-label", item.caption || activeProject.title);
+  } else if (item.type === "youtube") {
+    modalImage.hidden = true;
+    modalImage.src = "";
+    modalVideo.hidden = true;
+    modalVideo.src = "";
+    modalEmbed.hidden = false;
+    modalEmbed.src = item.src;
+    modalEmbed.title = item.caption || activeProject.title;
   } else {
     modalVideo.hidden = true;
     modalVideo.src = "";
+    modalEmbed.hidden = true;
     modalImage.hidden = false;
     modalImage.src = item.src;
     modalImage.alt = item.caption || activeProject.title;
@@ -465,7 +497,8 @@ const CIVIL_PHOTOS = [
   { src: IMG + "civil-6.jpg" },
   { src: IMG + "civil-7.jpg" },
   { src: IMG + "civil-8.jpg" },
-  { src: IMG + "civil-9.jpg" }
+  { src: IMG + "civil-9.jpg" },
+  { src: IMG + "civil-baking.jpg" }
 ].map((p, i) => ({ ...p, caption: p.caption || "placeholder" + (i + 1) }));
 
 let civilIndex = 0;

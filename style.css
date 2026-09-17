@@ -821,6 +821,7 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
   width: 100%; height: 100%;
   object-fit: contain;
   max-height: 88vh;
+  border: none; /* iframe (YouTube embed) also uses this class */
 }
 
 .modal__nav {
@@ -869,6 +870,8 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
   content: ""; position: absolute; left: 0; top: 0.55em;
   width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
 }
+.modal__desc a { color: var(--accent); text-underline-offset: 2px; }
+.modal__desc a:hover { text-decoration: underline; }
 
 @media (max-width: 760px) {
   .modal__panel { grid-template-columns: 1fr; }
