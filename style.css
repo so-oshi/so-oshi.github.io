@@ -1026,3 +1026,16 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
   .resume-modal__panel { width: 100vw; height: 100vh; border-radius: 0; }
   .resume-modal__embed { margin: 0 12px 12px; }
 }
+
+/* ==========================================================================
+   TEMPORARY SIMPLIFICATION — remove this block (only this block) to fully
+   restore the Contact photo slideshow, tile org labels, and modal tag
+   pills. Nothing here deletes any data: CIVIL_PHOTOS, each tile's `org`
+   text, and every project's `tags` array in script.js are untouched, and
+   every image file stays in assets/images/ — this just stops them from
+   rendering for now.
+   ========================================================================== */
+.contact__photo { display: none; }
+.contact__grid { grid-template-columns: 1fr; max-width: 560px; }
+.tile__org { display: none; }
+.modal__tags { display: none; }
