@@ -105,8 +105,8 @@ const PROJECTS = [
     category: "Other",
     title: "Flight Computer & Apogee Control",
     tagline: "Custom 4-layer flight computer + CFD-driven apogee control",
-    tags: ["PCB Design", "CFD", "ESP32-S3", "Embedded"],
-    stats: ["ESP32-S3", "4-Layer PCB", "IMU + Pressure Sensor"],
+    tags: ["PCB Design", "CFD", "KiCad"],
+    stats: [],
     hero: IMG + "arc-hero.jpg",
     gallery: [
       { src: IMG + "arc-hero.jpg", caption: "CFD velocity streamlines over the airframe" },
@@ -510,18 +510,15 @@ if (contactPhonePopoverBtn) contactPhonePopoverBtn.addEventListener("click", cop
 
 const CIVIL_PHOTOS = [
   { src: IMG + "ben-contact.jpg", caption: "Tap the arrows for more" },
-  { src: IMG + "civil-1.jpg" },
-  { src: IMG + "civil-2.jpg" },
-  { src: IMG + "civil-3.jpg" },
-  { src: IMG + "civil-4.jpg" },
-  { src: IMG + "civil-5.jpg" },
-  { src: IMG + "civil-6.jpg" },
-  { src: IMG + "civil-7.jpg" },
-  { src: IMG + "civil-8.jpg" },
-  { src: IMG + "civil-9.jpg" },
-  { src: IMG + "civil-baking-1.jpg" },
-  { src: IMG + "civil-baking-2.jpg" },
-  { src: IMG + "civil-baking-3.jpg" }
+  { src: IMG + "civil-3.jpg", caption: "Cooking Udon" },
+  { src: IMG + "civil-4.jpg", caption: "Motorcycle beach trip with friends" },
+  { src: IMG + "civil-5.jpg", caption: "International competition winnings (IWUF)" },
+  { src: IMG + "civil-6.jpg", caption: "Attempting ice skating (fell soon after)" },
+  { src: IMG + "civil-9.jpg", caption: "Soldering my friends dashboard (1995 Corvette)" },
+  { src: IMG + "civil-baking-1.jpg", caption: "Baking: Cookies for elementary school students" },
+  { src: IMG + "civil-baking-2.jpg", caption: "Baking: Three layer cake with ganache topping" },
+  { src: IMG + "civil-baking-3.jpg", caption: "Baking: Rustic chocolate cake" },
+  { src: IMG + "civil-8.jpg", caption: "Friends" }
 ].map((p, i) => ({ ...p, alt: p.caption || "Photo " + (i + 1) }));
 
 let civilIndex = 0;

@@ -1026,12 +1026,3 @@ section { padding: 56px var(--gutter); max-width: var(--maxw); margin: 0 auto; }
   .resume-modal__panel { width: 100vw; height: 100vh; border-radius: 0; }
   .resume-modal__embed { margin: 0 12px 12px; }
 }
-
-/* ==========================================================================
-   TEMPORARY SIMPLIFICATION — remove this block (only this block) to fully
-   restore the tile org labels and modal tag pills. Nothing here deletes
-   any data: each tile's `org` text and every project's `tags` array in
-   script.js are untouched — this just stops them from rendering for now.
-   ========================================================================== */
-.tile__org { display: none; }
-.modal__tags { display: none; }
