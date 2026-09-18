@@ -13,7 +13,7 @@ const PROJECTS = [
     org: "Vero Electric",
     category: "Vero Electric",
     title: "Industrial Battery Enclosure",
-    tagline: "240 kWh / 120 kW BESS enclosure, thermally validated with FEA",
+    tagline: "261 kWh / 135 kW BESS enclosure, thermally validated with FEA",
     tags: ["Mechanical Design", "Thermal FEA", "DFM", "SolidWorks"],
     stats: [],
     hero: IMG + "vero-enclosure-hero.jpg",
@@ -28,7 +28,7 @@ const PROJECTS = [
       { src: IMG + "vero-enclosure-workstation.jpg", caption: "Modeling the enclosure in SolidWorks" }
     ],
     desc: [
-      "Contracted to create a custom 240 kWh/120kW BESS enclosure fit for UL 9540A Standards.",
+      "Contracted to create a custom 261 kWh/135kW BESS enclosure fit for UL 9540A Standards.",
       "7.2 × 4.5 × 3 ft, 2.75 tons.",
       "Used thermal simulation and FEA to drive design decisions — including thermal shielding panels and panel stiffening — validating that shielded panel temperatures ran well below unshielded and insulated configurations.",
       "Produced investor-facing CAD renders and a custom high-voltage box, still in development.",
@@ -86,7 +86,7 @@ const PROJECTS = [
     title: "Drag Reduction System (DRS)",
     tagline: "Servo-actuated rear wing flaps, validated with CFD",
     tags: ["CFD", "Mechanism Design", "Rookie Project", "Paused"],
-    stats: ["37% drag reduction (calc.)", "2× actuated airfoils"],
+    stats: [],
     hero: IMG + "per-drs-hero.jpg",
     gallery: [
       { src: IMG + "per-drs-hero.jpg", caption: "DRS mechanism mounted to the rear wing" },
@@ -94,9 +94,9 @@ const PROJECTS = [
       { src: IMG + "per-drs-linkage.jpg", caption: "Actuation linkage detail" }
     ],
     desc: [
-      "Rookie project: a Drag Reduction System (DRS) for the car's rear wing that actuates two rear airfoils via an electric servo and custom linkage design.",
-      "Ran an angle-of-attack sweep in Luminary Cloud CFD to find the optimal airfoil angle, calculating a 37% reduction in drag on straightaways.",
-      "Integration didn't align with the 2026 summer timeline — on the roadmap for 2027."
+      "Didn't align with 2026 timeline, hopefully 2027!",
+      "Rookie project: a Drag Reduction System (DRS) for the car's rear wing that actuates two rear airfoils via an electric servo and custom linkage design. Modeled linkage geometries in Solidworks.",
+      "Ran an angle-of-attack sweep in Luminary Cloud CFD to find optimal airfoil angle, calculating a 37% reduction in drag on straightaways. Expected time savings of ~2 seconds per lap."
     ]
   },
   {
@@ -116,10 +116,10 @@ const PROJECTS = [
       { src: IMG + "arc-dcs.jpg", caption: "Descent Control System housing" }
     ],
     desc: [
-      "Solely responsible for designing the team's custom 4-layer flight computer — ESP32-S3 with external flash and crystal, a linear-actuator motor driver, voltage step-down, pressure sensor, IMU, and status LEDs — manufactured by JLCPCB.",
-      "The flight computer drives a linear actuator that moves Active Control System (ACS) flaps to control apogee, and was designed to integrate with a Descent Control System (DCS).",
-      "Ran CFD in Autodesk CFD and Ansys across flap angle and airspeed to build a 3rd-degree polynomial regression lookup table, letting the flight computer pick the best ACS configuration in flight.",
-      "The PCB and ACS design are still flying with the team in 2026."
+      "Personally designed the team's custom 4-layer flight computer using an ESP32-S3, a linear-actuator motor driver, and other components. (pressure sensor, IMU, External flash / crystal, status LEDs)",
+      "The computer drives a linear actuator that moves our Active Control System (ACS) flaps to dynamically adjust drag, and tune our flight apogee. Computer would also work with the Descent Control System (DCS), to adjust drone fans on descent.",
+      "Ran Autodesk CFD and Ansys simulations across flap angle and airspeed to help build a lookup table, letting the flight computer pick the best ACS configuration in flight.",
+      "This PCB and ACS design are still flying with the team in 2026."
     ]
   },
   {
@@ -206,8 +206,8 @@ const PROJECTS = [
       { src: IMG + "video-editor-daikoku.mp4", type: "video", poster: IMG + "video-editor-daikoku-poster.jpg", caption: "Daikoku Parking Area, Yokohama — night car meet edit", aspect: "9/16" }
     ],
     desc: [
-      "Grew team Instagram by +5.5k followers and +350k interactions as Media Lead, driving sponsor visibility and recruitment through edited videos.",
-      "Edited camcorder video for <a href=\"https://www.instagram.com/reel/DNgKfnMgBKg/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==\" target=\"_blank\" rel=\"noopener\">Portland International Raceway's</a> 2025 Indycar race."
+      "Grew Aerospace team Instagram by +5.5k followers and +350k interactions as Media Lead, driving sponsor visibility and student recruitment through edited videos.",
+      "Edited and filmed an Instagram reel posted by <a href=\"https://www.instagram.com/reel/DNgKfnMgBKg/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==\" target=\"_blank\" rel=\"noopener\">Portland International Raceway</a> for their 2025 Indycar race. Filmed on a camcorder."
     ]
   }
 ];
@@ -510,8 +510,8 @@ if (contactPhonePopoverBtn) contactPhonePopoverBtn.addEventListener("click", cop
 
 const CIVIL_PHOTOS = [
   { src: IMG + "ben-contact.jpg", caption: "Tap the arrows for more" },
+  { src: IMG + "civil-4.jpg", caption: "Motorcycle and muscle car road trip" },
   { src: IMG + "civil-3.jpg", caption: "Cooking Udon" },
-  { src: IMG + "civil-4.jpg", caption: "Motorcycle beach trip with friends" },
   { src: IMG + "civil-5.jpg", caption: "International competition winnings (IWUF)" },
   { src: IMG + "civil-6.jpg", caption: "Attempting ice skating (fell soon after)" },
   { src: IMG + "civil-9.jpg", caption: "Soldering my friends dashboard (1995 Corvette)" },
