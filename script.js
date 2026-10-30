@@ -80,6 +80,28 @@ const PROJECTS = [
     ]
   },
   {
+    id: "vero-elec-enclosure",
+    org: "Vero Electric",
+    category: "Vero Electric",
+    title: "Electronics Enclosure",
+    tagline: "Redesigned CNC enclosure — 60% lighter, 70% cheaper to manufacture",
+    tags: ["Mechanical Design", "DFM", "SolidWorks", "CNC Manufacturing"],
+    stats: [],
+    hero: IMG + "vero-elec-closed-angle2.jpg",
+    gallery: [
+      { src: IMG + "vero-elec-closed-angle2.jpg", caption: "Closed enclosure — alternate angle", aspect: "1/1" },
+      { src: IMG + "vero-elec-hero.jpg", caption: "Closed enclosure — assembled", aspect: "1/1" },
+      { src: IMG + "vero-elec-exploded.jpg", caption: "Exploded view — shell halves, PCB, and fasteners", aspect: "1/1" },
+      { src: IMG + "vero-elec-video.mp4", type: "video", poster: IMG + "vero-elec-video-poster.jpg", caption: "CNC-machined aluminum shell — fit check, pre-finish", aspect: "1/1" }
+    ],
+    desc: [
+      "Helped redesign the enclosure for Vero.",
+      "Reduced enclosure mass by 60% (356 → 150 grams) from the legacy design.",
+      "Reduced manufacturing costs by 70%.",
+      "Designed for CNC manufacturing constraints."
+    ]
+  },
+  {
     id: "drs",
     org: "Penn Electric Racing",
     category: "Penn Electric Racing",
