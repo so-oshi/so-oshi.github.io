@@ -92,6 +92,7 @@ const PROJECTS = [
       { src: IMG + "vero-elec-closed-angle2.jpg", caption: "Closed enclosure — alternate angle", aspect: "1/1" },
       { src: IMG + "vero-elec-hero.jpg", caption: "Closed enclosure — assembled", aspect: "1/1" },
       { src: IMG + "vero-elec-exploded.jpg", caption: "Exploded view — shell halves, PCB, and fasteners", aspect: "1/1" },
+      { src: IMG + "vero-elec-video2.mp4", type: "video", poster: IMG + "vero-elec-video2-poster.jpg", caption: "Batch of CNC-machined shells — pulling a unit for inspection", aspect: "1/1" },
       { src: IMG + "vero-elec-video.mp4", type: "video", poster: IMG + "vero-elec-video-poster.jpg", caption: "CNC-machined aluminum shell — fit check, pre-finish", aspect: "1/1" }
     ],
     desc: [
